@@ -9,6 +9,9 @@ export const Cart = () => {
     console.log("Carrito de compras:", cart);
   }, []);
 
+  const uniqueCartItems = cart.filter((item, index, self) => {
+    return index === self.findIndex((t) => t.id === item.id);
+  })
   return (
     <>
       <h2 className="text-center">Shopping cart</h2>
@@ -16,7 +19,7 @@ export const Cart = () => {
         <p>Your cart is empty</p>
       ) : (
         <>
-          {cart.map((item) => (
+          {uniqueCartItems.map((item) => (
             <CartItem key={item.id} id={item.id} />
           ))}
           <BuyBtn />
