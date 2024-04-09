@@ -1,0 +1,1 @@
+export const etoken = import.meta.env.VITE_TOKEN;
