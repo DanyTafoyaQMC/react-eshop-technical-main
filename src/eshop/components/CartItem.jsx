@@ -8,7 +8,7 @@ import { useCart } from "../hooks/useCart";
 export const CartItem = ({ id }) => {
     const { product, isLoading, fetchProduct } = useFetchProducts();
     const { handleRemoveFromCart, addQuantity, cart } = useCart();
-    const { name, imageUrl: img, price} = product;
+    const { name, imageUrl: img, price, quantity } = product;
     useEffect(()=>{
         console.log("Carrito de compras:", cart);
         fetchProduct(id)
@@ -27,13 +27,12 @@ export const CartItem = ({ id }) => {
                     <div className="card-body">
                       <h5 className="card-title">{name}</h5>
                       <p className="card-text">{price}</p>
-                      <p className="card-text">Quantity:</p>
+                      <p className="card-text">Quantity: {quantity}</p>
                       <div className="btn-group" role="group" aria-label="Quantity">
                         <button type="button" className="btn btn-secondary">-</button>
                         <button type="button" className="btn btn-secondary" onClick={()=>addQuantity(id)}>+</button>
                       </div>
                       <button type="button" className="btn btn-danger" onClick={ ()=>handleRemoveFromCart(id)}>Remove</button>
-                      <button type="button" className="btn btn-success float-end">Buy</button>
                     </div>
                   </div>
                 </div>
