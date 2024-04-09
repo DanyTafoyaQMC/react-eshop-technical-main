@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export const AddToCartBtn = ({ id }) => {
- const { dispatch } = useContext(CartContext);
+ const { dispatch } = useContext( CartContext );
  const navigate = useNavigate();
 
   const onAddToCart = () => {

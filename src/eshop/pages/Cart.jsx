@@ -17,7 +17,7 @@ export const Cart = () => {
         ? <p>Your cart is empty</p>
         : (
           cart.map((item) => (
-            <CartItem key={item.id} item={item} />
+            <CartItem key={item.id} id={item.id} />
           ))
         )
       }

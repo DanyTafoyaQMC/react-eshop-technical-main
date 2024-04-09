@@ -3,3 +3,4 @@ export * from "./Header";
 export * from "./ProductsComponent";
 export * from "./AddToCartBtn";
 export * from "./CartItem";
+export * from "./Loading";
