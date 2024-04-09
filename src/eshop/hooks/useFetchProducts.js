@@ -3,32 +3,30 @@ import ProductsApi from "../../api/axios";
 
 
 export const useFetchProducts = () => {
-    const [products, setProducts] = useState([]);
-    const [product, setProduct] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
+    const [ products, setProducts ] = useState([]);
+    const [ product, setProduct ] = useState({});
+    const [ isLoading, setIsLoading ] = useState( false );
 
     const handleGetProducts = async () => {
       try {
-        setIsLoading(true);
+        setIsLoading( true );
         const response = await ProductsApi.get();
-        setProducts(response.data.products);
-        console.log(response.data.products);
-        setIsLoading(false);
+        setProducts( response.data.products );
+        setIsLoading( false );
       } catch (error) {
         console.error("Error al obtener los productos:", error)
-        setIsLoading(false);
+        setIsLoading( false );
       }
     };
 
     const handleGetProduct = async ( productId ) => {
       try {
-        setIsLoading(true);
+        setIsLoading( true );
         const response = await ProductsApi.get("/" + productId);
         setProduct(response.data.product);
-        setIsLoading(false);
-        console.log("data", response.data.product);
+        setIsLoading( false );
       } catch (error) {
-        setIsLoading(false);
+        setIsLoading( false );
         console.error("Error al obtener los productos:", error);
       }
     };
@@ -38,5 +36,5 @@ export const useFetchProducts = () => {
     fetchProducts:handleGetProducts,
     fetchProduct:handleGetProduct,
     isLoading
-  }
-}
+  };
+};

@@ -1,22 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CartContext } from "../context/Cart";
+import { CartItem } from "../components";
 
 export const Cart = () => {
   const { state } = useContext(CartContext);
-
+  const { cart } = state;
+  useEffect(() => {
+    console.log("Carrito de compras:", cart);
+  }, [])
+  
   return (
-    <div>
-      <h2>Cart Page</h2>
-      <div>
-        <h3>Cart Items:</h3>
-        <ul>
-          {state.cart.map((item) => (
-            <li key={item.id}>
-              {item.id} {/* Aquí puedes mostrar otros detalles del producto si los tienes */}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+      <h2 className="text-center">Shopping cart</h2>
+      { 
+        cart.length === 0
+        ? <p>Your cart is empty</p>
+        : (
+          cart.map((item) => (
+            <CartItem key={item.id} item={item} />
+          ))
+        )
+      }
+    </>
   );
 };
