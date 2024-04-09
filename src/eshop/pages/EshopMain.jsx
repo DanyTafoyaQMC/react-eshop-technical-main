@@ -1,12 +1,14 @@
 import { useEffect } from "react"
 import ProductsApi from "../../api/axios"
+import { etoken } from "../../api/config/envVariables";
 
 
 
 
 export const EshopMain = () => {
   useEffect(() => {
-  ProductsApi.get("/").then(res => console.log(res.data))
+  console.log("token : ", etoken);
+  ProductsApi.get().then(res => console.log("respuesta: ",res.data)).catch(err => console.log("Error: ", err))
   }, [])
   return (
     <>
