@@ -1,14 +1,14 @@
-import { useContext } from "react"
-import { CartContext } from "../context/Cart"
+
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
 
 // eslint-disable-next-line react/prop-types
 export const AddToCartBtn = ({ id }) => {
- const { dispatch } = useContext( CartContext );
+ const { handleAddToCart } = useCart();
  const navigate = useNavigate();
 
   const onAddToCart = () => {
-    dispatch({ type: "ADD_TO_CART", payload: { id } });
+    handleAddToCart(id);
     navigate("/cart");
   };
   return (
