@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { AddToCartBtn } from "./"
 
 
 // eslint-disable-next-line react/prop-types
@@ -18,7 +19,7 @@ export const ProductsComponent = ({id, name, price, imageUrl, description}) => {
         <div className="card-footer">
             <div className="controllers d-flex justify-content-between">
               <Link className="btn btn-info" to={`/product/${id}`}>View more</Link>
-              <Link className="btn btn-primary">Add to cart</Link>
+              <AddToCartBtn id={id} />
             </div>
         </div>
     </div>

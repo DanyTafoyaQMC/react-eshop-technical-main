@@ -1,37 +1,19 @@
-import { useEffect, useState, useCallback } from "react";
-import ProductsApi from "../../api/axios";
+import { useEffect } from "react";
 import { ProductsComponent } from "../components";
-
-const memoizedProducts = (products) => products; // memorización simple
+import { useFetchProducts } from "../hooks/useFetchProducts";
 
 export const EshopMain = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const memoizedProductsList = useCallback(memoizedProducts, [products]); // lista de productos memorizados
+  const { products, fetchProducts, isLoading } = useFetchProducts(); // Corrección aquí
 
   useEffect(() => {
-    setIsLoading(true);
-    handleGetProducts();
-  }, []);
-
-  const handleGetProducts = async () => {
-    try {
-      const response = await ProductsApi.get();
-      setProducts(response.data.products);
-      setIsLoading(false);
-      console.log(response.data.products);
-    } catch (error) {
-      setIsLoading(false);
-      console.error("Error al obtener los productos:", error);
-    }
-  };
+    fetchProducts(); // Corrección aquí
+  }, []); // Corrección aquí
 
   return (
     <>
       <div className="row d-flex justify-content-center gap-3 p-3">
         {!isLoading ? (
-          memoizedProductsList(products).map((product) => (
+          products.map((product) => ( // Corrección aquí
             <ProductsComponent key={product.id} {...product} />
           ))
         ) : (
