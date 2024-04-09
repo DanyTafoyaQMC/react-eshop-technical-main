@@ -1,18 +1,44 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import ProductsApi from "../../api/axios"
-import { etoken } from "../../api/config/envVariables";
+import { ProductComponent } from "../components";
+
 
 
 
 
 export const EshopMain = () => {
+
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-  console.log("token : ", etoken);
-  ProductsApi.get().then(res => console.log("respuesta: ",res.data)).catch(err => console.log("Error: ", err))
-  }, [])
+    setIsLoading(true);
+    handleGetProducts();
+    setIsLoading(false);
+  }, []);
+
+  const handleGetProducts = async() => {
+    try {
+      const response = await ProductsApi.get();
+      setProducts(response.data.products)
+      setIsLoading(false);
+      console.log(response.data.products);
+    } catch (error) {
+      setIsLoading(false)
+      console.error("Error al obtener los productos: ",error);
+    }
+  };
+
   return (
     <>
-        <h2>Main page</h2>
+      <div className="row d-flex justify-content-center gap-3 p-3">
+      { !isLoading ? products.map(product => (
+          
+          <ProductComponent key={product.id} {...product} />
+
+          )) : "Loading..." 
+        }
+      </div>
     </>
   )
 }
