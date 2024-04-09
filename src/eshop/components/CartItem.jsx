@@ -7,9 +7,10 @@ import { useCart } from "../hooks/useCart";
 // eslint-disable-next-line react/prop-types
 export const CartItem = ({ id }) => {
     const { product, isLoading, fetchProduct } = useFetchProducts();
-    const { handleRemoveFromCart } = useCart();
+    const { handleRemoveFromCart, addQuantity, cart } = useCart();
     const { name, imageUrl: img, price} = product;
     useEffect(()=>{
+        console.log("Carrito de compras:", cart);
         fetchProduct(id)
     },[id]);
 
@@ -29,7 +30,7 @@ export const CartItem = ({ id }) => {
                       <p className="card-text">Quantity:</p>
                       <div className="btn-group" role="group" aria-label="Quantity">
                         <button type="button" className="btn btn-secondary">-</button>
-                        <button type="button" className="btn btn-secondary">+</button>
+                        <button type="button" className="btn btn-secondary" onClick={()=>addQuantity(id)}>+</button>
                       </div>
                       <button type="button" className="btn btn-danger" onClick={ ()=>handleRemoveFromCart(id)}>Remove</button>
                       <button type="button" className="btn btn-success float-end">Buy</button>
