@@ -10,8 +10,11 @@ const initialState = {
 export const CartProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(cartReducer, initialState)
+  const getTotal = () => {
+    return state.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  };
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, getTotal }}>
       { children }
     </CartContext.Provider>
   )
