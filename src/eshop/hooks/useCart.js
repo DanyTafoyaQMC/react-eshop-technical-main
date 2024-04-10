@@ -12,13 +12,10 @@ export const useCart = () => {
     const handleRemoveFromCart = (id) => {
       dispatch({ type: "REMOVE_FROM_CART", payload: { id } });
     };
-    const addQuantity = (id) => {
-      dispatch({ type: "ADD_QUANTITY", payload: { id } });
-    };
+
   return {
     cart: state.cart,
     handleAddToCart,
     handleRemoveFromCart,
-    addQuantity,
   }
 }
